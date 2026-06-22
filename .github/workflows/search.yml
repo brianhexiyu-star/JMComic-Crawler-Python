@@ -21,7 +21,7 @@ jobs:
 
       - name: 安装 jmcomic
         run: |
-          pip install jmcomic -i https://pypi.org/project --upgrade
+          pip install jmcomic --upgrade
 
       - name: 🔍 搜索本子
         env:
