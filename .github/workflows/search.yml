@@ -1,0 +1,29 @@
+name: 🔍 搜索本子（按关键词搜ID）
+
+on:
+  workflow_dispatch:
+    inputs:
+      SEARCH_KEYWORD:
+        type: string
+        description: '搜索关键词，比如：海贼王 無修正 MANA'
+        required: true
+
+jobs:
+  search:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: 安装 jmcomic
+        run: |
+          pip install jmcomic -i https://pypi.org/project --upgrade
+
+      - name: 🔍 搜索本子
+        env:
+          SEARCH_KEYWORD: ${{ github.event.inputs.SEARCH_KEYWORD }}
+        run: python usage/search.py
